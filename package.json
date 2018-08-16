@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "Hernoku",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "Host your website on my website.  Link to your github account",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -19,8 +19,11 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "passport": "^0.4.0",
+    "passport-github2": "^0.1.11"
   }
 }
