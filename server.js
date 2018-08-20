@@ -50,7 +50,7 @@ require("./routes/api")(app);
 
 
 //force:true drops table if exists
-db.sequelize.sync(/*{ force: true }*/).then(function () {
+db.sequelize.sync({/* force: true */}).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });

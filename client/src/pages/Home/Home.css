@@ -1,0 +1,13 @@
+#gitlogo {
+    width: 40px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+#github-btn {
+    display:flex;
+    width: 290px;
+    margin: 50px auto;
+    align-items: center;
+    justify-content: center;
+}

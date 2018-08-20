@@ -17,6 +17,15 @@ module.exports = app => {
         res.send(true);
     })
 
+    app.get("/api/public",(req,res)=>{
+        db.Project.findAll({where:{public:true}})
+        .then(result=> {
+            res.send(result);
+        }).catch(err=>{
+            res.send(err);
+        })
+    })
+
     app.get("/api/hostedProjects",ensureAuthenticated,(req,res)=>{
         db.Project.findAll({})
         .then(result => {
