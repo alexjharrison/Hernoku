@@ -23,7 +23,7 @@ class Home extends React.Component {
             <div>
                 <h1 className="center-align">Hosted Projects</h1>
                 <div className="row center">
-                    <a href="/auth" id="github-btn" className="btn blue-grey darken-3 btn-large waves-effect">
+                    <a href="/auth/github" id="github-btn" className="btn blue-grey darken-3 btn-large waves-effect">
                         <img id="gitlogo" src="images/github.jpg" alt="github logo"/>
                         Login in with GitHub!
                     </a>

@@ -1,7 +1,7 @@
 
 module.exports = (app, passport) => {
 
-    app.get('/auth',
+    app.get('/auth/github',
         passport.authenticate('github', {
             scope:
                 [
@@ -15,13 +15,18 @@ module.exports = (app, passport) => {
             // function will not be called.
         });
 
-    app.get('/auth/callback',
-        passport.authenticate('github', { failureRedirect: '/login' }),
+    app.get('/auth/github/callback',
+        passport.authenticate('github', { failureRedirect: '/' }),
         function (req, res) {
             console.log(req);
-            res.redirect('/');
+            res.redirect('/MyProjects');
         }
     );
+
+    app.get('/logout', function (req, res) {
+        req.logout();
+        res.redirect('/');
+      });
 
 }
 

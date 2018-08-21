@@ -1,12 +1,11 @@
 const express = require("express");
-const path = require("path");
-const util = require("util");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const GitHubStrategy = require("passport-github2");
+const passport = require("passport");
+const GitHubStrategy = require("passport-github2").Strategy;
 require("dotenv").config();
 const session = require("express-session");
-const passport = require("passport");
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -35,6 +34,10 @@ passport.use(new GitHubStrategy({
     // User.findOrCreate({ githubId: profile.id }, function (err, user) {
     //   return done(err, user);
     // });
+    return done(null, {
+      accessToken: accessToken,
+      profile: profile
+    });
   }
 ));
 
