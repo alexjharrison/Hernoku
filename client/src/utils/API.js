@@ -18,6 +18,14 @@ export default {
         return axios.get("/api/findProj/"+projectName);
     },
     addProject: attr => {
+        //ping watcher program
+        axios.post("http://hernoku.us/api/update",attr.projName);
+        console.log(attr);
         return axios.post("/api/addProj",attr);
+    },
+    removeProj: proj => {
+        //ping watcher program
+        axios.post("http://hernoku.us/api/update",proj)
+        return axios.delete("/api/remove/"+proj);
     }
 }

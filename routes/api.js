@@ -69,7 +69,26 @@ module.exports = app => {
     })
 
     app.post("/api/addProj",(req,res)=> {
-        console.log(req);
+        console.log(req.body);
+        if(!req.body.description) req.body.description = ("");
+        db.Project.create({
+            username: req.body.username,
+            repoLink: req.body.repoLink,
+            repoName: req.body.projName,
+            description: req.body.description,
+            fullStack: req.body.fullStack,
+            react: req.body.react,
+            gitLink: req.body.gitLink,
+            hookLink: req.body.hookLink,
+            isPublic: req.body.isPublic
+        })
+        res.send("success");
+    })
+
+    app.delete("/api/remove/:proj",(req,res)=>{
+        const proj = req.params.proj;
+        db.Project.destroy({where:{repoName:proj}});
+        res.send("success");
     })
 
     // Send every request to the React app

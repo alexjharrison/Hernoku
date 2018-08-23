@@ -6,16 +6,13 @@ class Settings extends React.Component {
     state = {
         loggedIn: false,
         projName: window.location.pathname.slice(10),
-        author: "",
         username: "",
-        repoLink: "",
-        repoName: "",
         description: "",
-        fullStack: false,
+        fullStack: true,
         react: false,
         gitLink: "",
         hookLink: "",
-        isPublic: false,
+        isPublic: true,
         envNames: [],
         envValues: []
     }
@@ -27,12 +24,21 @@ class Settings extends React.Component {
         }).catch(err => {
             console.log(err);
         });
-        API.findProject(this.state.projName)
+        API.getAllMyRepos()
             .then(res => {
-                console.log(res);
+                const thisProj = res.data.filter(proj=>proj.name===this.state.projName)[0];
                 this.setState({
-
-                })
+                    username: this.state.loggedIn.username,
+                    repoLink: thisProj.html_url,
+                    description: thisProj.description,
+                    fullStack: false,
+                    react: false,
+                    gitLink: thisProj.clone_url,
+                    hookLink: thisProj.hooks_url,
+                    isPublic: false,
+                    envNames: [],
+                    envValues: []
+                });         
             }).catch(err => { console.log(err) })
     }
 
@@ -41,13 +47,15 @@ class Settings extends React.Component {
         const fullStack = document.querySelector('input[name="stack"]:checked').value;
         const react = document.querySelector('input[name="react"]:checked').value;
         const isPublic = document.querySelector('input[name="public"]:checked').value;
-        console.log(fullStack, react, isPublic);
         this.setState({ 
             fullStack: fullStack,
             react:react,
             isPublic:isPublic
         })
-        // API.addProject()
+        API.addProject(this.state).then(res=>{
+            window.location.href = "/";
+        });
+        
     }
 
 

@@ -22,7 +22,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (obj, done) {
-  console.log(obj.accessToken,obj.profile.username, obj.profile.displayName);
+  // console.log(obj.accessToken,obj.profile.username, obj.profile.displayName);
   done(null, obj);
 });
 
@@ -54,7 +54,7 @@ require("./routes/api")(app);
 
 
 //force:true drops table if exists
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({/* force: true */}).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });

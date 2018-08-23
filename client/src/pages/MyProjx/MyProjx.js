@@ -30,16 +30,23 @@ class MyProjx extends React.Component {
         }).catch(err=>console.log(err));
     }
 
+    removeProj = event => {
+        const item2Remove = event.target.getAttribute("data-repoName");
+        API.removeProj(item2Remove).then(res=>{
+            window.location.reload();
+        });
+    }
+
     render() {
         return (
             <div>
                 <Navbar loggedIn={this.state.loggedIn.displayName} />
                 <h3>Welcome {this.state.loggedIn.displayName}</h3>
                 <div className="container">
-                    <ul className="collection s10 offset-s1">
+                    <ul className="collection s6 offset-s3">
                         <li className="collection-header"><h4>Choose a Repository to Modify/Remove</h4></li>
                         {this.state.allProjects.map(project=>(
-                            <ProjListItem project={project} username={this.state.loggedIn.username} deployed={this.state.myProjects} key={project.url} />
+                            <ProjListItem remove={this.removeProj} project={project} username={this.state.loggedIn.username} deployed={this.state.myProjects} key={project.url} />
                         ))}
                     </ul>
                 </div>

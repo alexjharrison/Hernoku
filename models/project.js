@@ -1,9 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
     var Project = sequelize.define("Project", {
-      author: {
-        type: DataTypes.TEXT,
-        allowNull: false
-      },
       username: {
         type: DataTypes.TEXT,
         allowNull: false
