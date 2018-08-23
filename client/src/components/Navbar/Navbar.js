@@ -1,15 +1,18 @@
 import React from 'react';
 
-const Navbar = () => (
+const Navbar = ({ loggedIn }) => (
     <nav className="nav-extended">
         <div className="nav-wrapper indigo darken-1">
+            {loggedIn? (
+                <a href="/auth/github/logout">logout</a>
+            ):""}
             <a href="/" className="brand-logo center">Hernoku</a>
         </div>
         <div className="nav-content indigo accent-2">
             <ul className="tabs tabs-transparent">
                 <li className="tab"><a className={window.location.pathname === "/" ? "active" : ""} href="/">All Projects</a></li>
-                <li className="tab"><a className={window.location.pathname === "/MyProjects" ? "active" : ""} href="/MyProjects">My Projects</a></li>
-                <li className="tab"><a className={window.location.pathname === "/AddProject" ? "active" : ""} href="/AddProject">Add Project</a></li>
+                <li className={loggedIn ? "tab" : "tab disabled"}><a className={window.location.pathname === "/MyProjects" ? "active" : ""} href="/MyProjects">My Projects</a></li>
+                <li className={loggedIn ? "tab" : "tab disabled"}><a className={window.location.pathname === "/AddProject" ? "active" : ""} href="/AddProject">Add Project</a></li>
             </ul>
         </div>
     </nav>

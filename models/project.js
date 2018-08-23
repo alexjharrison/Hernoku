@@ -20,15 +20,23 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.TEXT,
         allowNull: false
       },
-      stack: {
-        type: DataTypes.TEXT,
+      fullStack: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      react: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
       },
       gitLink: {
         type: DataTypes.TEXT,
         allowNull: false
       },
-      public: {
+      hookLink: {
+        type: DataTypes.TEXT,
+        allowNull: false
+      },
+      isPublic: {
         type: DataTypes.BOOLEAN,
         allowNull: false
       }

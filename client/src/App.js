@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-// import UnverifiedHome from "./components/pages/UnverifiedHome";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import AddProj from "./pages/AddProj";
 import MyProjx from "./pages/MyProjx";
@@ -20,12 +18,11 @@ class App extends Component {
       <div>
         <Router>
           <div>
-            <Navbar />
             <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/AddProject" component={AddProj} />
             <Route exact path="/MyProjects" component={MyProjx} />
-            <Route exact path="/Settings" component={Settings} />
+            <Route path="/Settings" component={Settings} />
             <Route component={NoMatch} />
             
             </Switch>

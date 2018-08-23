@@ -22,13 +22,14 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (obj, done) {
+  console.log(obj.accessToken,obj.profile.username, obj.profile.displayName);
   done(null, obj);
 });
 
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: `http://127.0.0.1:${PORT}/auth/callback`
+  callbackURL: `http://localhost:3000/auth/github/callback`
 },
   function (accessToken, refreshToken, profile, done) {
     // User.findOrCreate({ githubId: profile.id }, function (err, user) {
@@ -53,7 +54,7 @@ require("./routes/api")(app);
 
 
 //force:true drops table if exists
-db.sequelize.sync({/* force: true */}).then(function () {
+db.sequelize.sync({ force: true }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
