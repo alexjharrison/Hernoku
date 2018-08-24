@@ -54,11 +54,14 @@ class Settings extends React.Component {
         })
         console.log(this.state.hookLink);
         API.attachHook(this.state.hookLink).then(res=>{
+            API.addProject(this.state).then(res=>{
+                window.location.href = "/MyProjects"
+            })
             console.log(res);
         }).catch(err=>console.log(err))
-        API.addProject(this.state).then(res=>{
+        // API.addProject(this.state).then(res=>{
             // window.location.href = "/";
-        });
+        // });
         
     }
 

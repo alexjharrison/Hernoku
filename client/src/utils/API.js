@@ -18,37 +18,16 @@ export default {
         return axios.get("/api/findProj/"+projectName);
     },
     addProject: attr => {
-        //ping watcher program
-        axios.post("http://hernoku.us/api/update",attr.projName);
-        console.log(attr);
         return axios.post("/api/addProj",attr);
     },
     removeProj: proj => {
-        //ping watcher program
-        axios.post("http://hernoku.us/api/update",proj)
+        axios.post("http://hernoku.us/api/delete",proj)
         return axios.delete("/api/remove/"+proj);
     },
     attachHook: hookURL => {
-        return axios.post(hookURL,{
-            name: "web",
-            config: {
-                url: "http://hernoku.us/api/pushNotice",
-                content_type: "json",
-            },
-            events: ["push"],
-            active:true
-        });
+        return axios.post("/api/addHook",{hookURL:hookURL});
     },
     removeHook: hookURL => {
-        return axios.post(hookURL,{
-            name: "web",
-            config: {
-                url: "http://hernoku.us/api/pushNotice",
-                content_type: "json",
-                insecure_ssl: 1
-            },
-            events: ["push"],
-            active:false
-        });
+        return axios.post("/api/removeHook",{hookURL:hookURL});
     }
 }

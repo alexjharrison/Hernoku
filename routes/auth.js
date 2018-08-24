@@ -6,7 +6,7 @@ module.exports = (app, passport) => {
             scope:
                 [
                     'read:user',
-                    "write:repo_hook",
+                    "admin:repo_hook",
                     "repo:status"
                 ]
         }),
