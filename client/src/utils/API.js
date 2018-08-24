@@ -27,5 +27,28 @@ export default {
         //ping watcher program
         axios.post("http://hernoku.us/api/update",proj)
         return axios.delete("/api/remove/"+proj);
+    },
+    attachHook: hookURL => {
+        return axios.post(hookURL,{
+            name: "web",
+            config: {
+                url: "http://hernoku.us/api/pushNotice",
+                content_type: "json",
+            },
+            events: ["push"],
+            active:true
+        });
+    },
+    removeHook: hookURL => {
+        return axios.post(hookURL,{
+            name: "web",
+            config: {
+                url: "http://hernoku.us/api/pushNotice",
+                content_type: "json",
+                insecure_ssl: 1
+            },
+            events: ["push"],
+            active:false
+        });
     }
 }

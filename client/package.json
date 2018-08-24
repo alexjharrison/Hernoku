@@ -1,6 +1,7 @@
 {
   "name": "hernoku",
   "version": "0.1.0",
+  "homepage":"http://localhost:3000/",
   "private": true,
   "proxy":{ 
     "/api": {

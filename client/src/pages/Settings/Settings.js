@@ -52,8 +52,12 @@ class Settings extends React.Component {
             react:react,
             isPublic:isPublic
         })
+        console.log(this.state.hookLink);
+        API.attachHook(this.state.hookLink).then(res=>{
+            console.log(res);
+        }).catch(err=>console.log(err))
         API.addProject(this.state).then(res=>{
-            window.location.href = "/";
+            // window.location.href = "/";
         });
         
     }

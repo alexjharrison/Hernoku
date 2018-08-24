@@ -2,6 +2,7 @@ const db = require("../models");
 const axios = require("axios");
 const JSON = require('circular-json');
 const fs = require("fs");
+const path = require("path");
 
 
 function ensureAuthenticated(req, res, next) {
@@ -94,7 +95,7 @@ module.exports = app => {
     // Send every request to the React app
     // Define any API routes before this runs
     app.get("*", function (req, res) {
-        res.sendFile(path.join(__dirname, "./client/build/index.html"));
+        res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
 
 }
