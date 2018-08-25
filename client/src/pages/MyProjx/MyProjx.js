@@ -31,13 +31,14 @@ class MyProjx extends React.Component {
     }
 
     removeProj = event => {
-        const item2Remove = event.target.getAttribute("data-repoName");
+        const item2Remove = event.target.getAttribute("data-reponame");
         const hookUrl = this.state.myProjects.filter(proj=>
             proj.repoName===item2Remove
         )[0].hookLink;
         console.log(hookUrl);
         API.removeHook(hookUrl).then(res=>{
-            API.removeProj(item2Remove);
+            API.removeProj(item2Remove)
+            .then(res=>{window.location.reload()})
         }).catch(err=>console.log(err));
         // API.removeHook
         // API.removeProj(item2Remove).then(res=>{

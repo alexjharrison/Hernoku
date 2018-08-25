@@ -9,7 +9,7 @@ const PubProjItem = ({project}) => (
             <p>{project.description}</p>
             </div>
             <div className="card-action">
-                <a className="purple-text text-darken-3" href={`http://${project.username}-${project.projectName}.hernoku.us`}>Deployed Site</a>
+                <a className="purple-text text-darken-3" href={`http://${project.username}-${project.repoName}.hernoku.us`}>Deployed Site</a>
                 <a className="pink-text text-darken-3" href={project.repoLink}>Source Code</a>
             </div>
         </div>

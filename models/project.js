@@ -35,6 +35,10 @@ module.exports = function(sequelize, DataTypes) {
       isPublic: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+      },
+      envs: {
+        type: DataTypes.TEXT,
+        allowNull: false
       }
     });
     return Project;

@@ -81,7 +81,8 @@ module.exports = app => {
             react: req.body.react,
             gitLink: req.body.gitLink,
             hookLink: req.body.hookLink,
-            isPublic: req.body.isPublic
+            isPublic: req.body.isPublic,
+            envs: req.body.envs
         })
         res.send("success");
     })

@@ -8,13 +8,12 @@ class Settings extends React.Component {
         projName: window.location.pathname.slice(10),
         username: "",
         description: "",
-        fullStack: true,
-        react: false,
+        fullStack: "false",
+        react: "true",
         gitLink: "",
         hookLink: "",
-        isPublic: true,
-        envNames: [],
-        envValues: []
+        isPublic: "true",
+        envs: ""
     }
 
     componentDidMount() {
@@ -26,43 +25,40 @@ class Settings extends React.Component {
         });
         API.getAllMyRepos()
             .then(res => {
-                const thisProj = res.data.filter(proj=>proj.name===this.state.projName)[0];
+                const thisProj = res.data.filter(proj => proj.name === this.state.projName)[0];
                 this.setState({
                     username: this.state.loggedIn.username,
                     repoLink: thisProj.html_url,
                     description: thisProj.description,
-                    fullStack: false,
-                    react: false,
                     gitLink: thisProj.clone_url,
-                    hookLink: thisProj.hooks_url,
-                    isPublic: false,
-                    envNames: [],
-                    envValues: []
-                });         
+                    hookLink: thisProj.hooks_url
+                });
             }).catch(err => { console.log(err) })
     }
 
     saveProject = event => {
         event.preventDefault();
-        const fullStack = document.querySelector('input[name="stack"]:checked').value;
-        const react = document.querySelector('input[name="react"]:checked').value;
-        const isPublic = document.querySelector('input[name="public"]:checked').value;
-        this.setState({ 
-            fullStack: fullStack,
-            react:react,
-            isPublic:isPublic
-        })
-        console.log(this.state.hookLink);
-        API.attachHook(this.state.hookLink).then(res=>{
-            API.addProject(this.state).then(res=>{
-                window.location.href = "/MyProjects"
-            })
-            console.log(res);
-        }).catch(err=>console.log(err))
-        // API.addProject(this.state).then(res=>{
-            // window.location.href = "/";
-        // });
-        
+        if (this.state.fullStack !== "" || this.state.react !== "" || this.state.isPublic !== "") {
+            API.attachHook(this.state.hookLink).then(res => {
+                API.addProject(this.state).then(res => {
+                    window.location.href = "/MyProjects"
+                }).catch(err=>console.log(err));
+                console.log(res);
+            }).catch(err => console.log(err))
+        }
+    }
+
+    radio = event => {
+        console.log(event.target);
+        const question = event.target.getAttribute("name");
+        const value = event.target.value;
+        this.setState({ [`${question}`]: value });
+    }
+
+    envChange = event => {
+        event.preventDefault();
+        this.setState({envs: event.target.value})
+        console.log(event.target.value);
     }
 
 
@@ -72,44 +68,55 @@ class Settings extends React.Component {
                 <Navbar loggedIn={this.state.loggedIn} />
                 <h1>Deployment Settings</h1>
                 <h4>{this.state.projName}</h4>
-                <form id="stuff">
+                <form>
                     <p> Github Pages or Heroku Compatible?<br />
                         <label>
-                            <input name="stack" type="radio" value="false" checked />
+                            <input onChange={this.radio} checked={this.state.fullStack === "false"} name="fullStack" type="radio" value={false} />
                             <span>Github</span>
                         </label>
                     </p>
                     <p>
                         <label>
-                            <input name="stack" type="radio" value="true" />
+                            <input onChange={this.radio} checked={this.state.fullStack === "true"} name="fullStack" type="radio" value={true} />
                             <span>Heroku</span>
                         </label>
                     </p>
                     <p>Built with React?<br />
                         <label>
-                            <input name="react" type="radio" value="true" checked />
+                            <input onChange={this.radio} checked={this.state.react === "true"} name="react" type="radio" value={true} />
                             <span>Yup</span>
                         </label>
                     </p>
                     <p>
                         <label>
-                            <input name="react" type="radio" value="false" />
+                            <input onChange={this.radio} checked={this.state.react === "false"} name="react" type="radio" value={false} />
                             <span>Nope</span>
                         </label>
                     </p>
                     <p>Make this project public?<br />
                         <label>
-                            <input name="public" type="radio" value="true" checked />
+                            <input onChange={this.radio} checked={this.state.isPublic === "true"} name="isPublic" type="radio" value={true} />
                             <span>Yup</span>
                         </label>
                     </p>
                     <p>
                         <label>
-                            <input name="public" type="radio" value="false" />
+                            <input onChange={this.radio} checked={this.state.isPublic === "false"} name="isPublic" type="radio" value={false} />
                             <span>Nope</span>
                         </label>
                     </p>
-                </form>
+                </form><br/>
+                <h5>Environmental Variables</h5>
+                <div className="row">
+                    <form className="col s12">
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <textarea id="textarea1" className="materialize-textarea" onChange={this.envChange} value={this.state.envs}></textarea>
+                                <label htmlFor="textarea1">Copy contents of .env file here</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <button onClick={this.saveProject} className="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i className="material-icons right">send</i>
                 </button>
