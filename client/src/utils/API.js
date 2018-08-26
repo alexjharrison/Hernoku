@@ -21,8 +21,8 @@ export default {
         return axios.post("/api/addProj",attr);
     },
     removeProj: proj => {
-        axios.post("http://hernoku.us/api/delete",proj)
-        return axios.delete("/api/remove/"+{proj:proj});
+        axios.post("http://hernoku.us/api/delete/",{proj:proj})
+        return axios.delete("/api/remove/"+proj);
     },
     attachHook: hookURL => {
         return axios.post("/api/addHook",{hookURL:hookURL});
