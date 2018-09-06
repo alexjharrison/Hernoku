@@ -1,29 +1,18 @@
-# Create React Express App
+# Hernoku App
 
-## About This Boilerplate
+Explanation of app can be found here
+https://drive.google.com/file/d/1iRTeyiCIS78nosRNYhU_DiVEGCi9Av7A/view?usp=sharing
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+## Goals
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+Hernoku is a full stack React web app that can be used to host any github project on a Raspberry Pi.
 
-## Starting the app locally
+It is compatible with projects that work on both Heroku & Github Pages.
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+The Hernoku project is the site where users can add, modify and delete projects from the Pi
 
-```
-yarn install
-```
+## Companion App
 
-This should install node modules within the server and the client folder.
+[Github Puller Proxy](https://github.com/alexjharrison/Github-Puller-Proxy) is the companion app to Hernoku which hosts the backend code and manages all the live projects on the site.
 
-After both installations complete, run the following command in your terminal:
-
-```
-yarn start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+GPP also listens for webhooks made when a github branch is updated.  When this occurs, it redownloads the projects and runs the updated code.
